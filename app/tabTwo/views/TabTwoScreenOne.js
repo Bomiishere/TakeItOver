@@ -119,7 +119,7 @@ export default class TabTwoScreenOne extends React.Component {
         ],
           { cancelable: false }
       )
-      
+
     } else {
       Alert.alert(
         '密碼錯誤別亂試～',
@@ -278,11 +278,12 @@ export default class TabTwoScreenOne extends React.Component {
                   <SegmentedControls
                     tint={'#f80046'}
                     selectedTint= {'white'}
-                    backTint= {'#1e2126'}
+                    backTint= {'white'}
                     options={ options }
                     allowFontScaling={ false } // default: true
-                    onSelection={ setSelectedOption.bind(this) }
                     selectedOption={ this.state.puzzle_result }
+                    selectedIndex={0}
+                    onSelection={ setSelectedOption.bind(this) }
                     optionStyle={{fontFamily: 'AvenirNext-Medium'}}
                     optionContainerStyle={{flex: 1}}
                   />

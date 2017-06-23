@@ -1,6 +1,7 @@
 'use strict'
 import React from 'react';
-import { 
+import {
+
   View,
   Text,
   TouchableOpacity,
@@ -16,9 +17,12 @@ import {
   Dimensions,
   Alert,
   KeyboardAvoidingView
+
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ScorePuzzle from '../../components/ScorePuzzle';
+import MapPuzzle from '../../components/MapPuzzle';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from 'react-native-modalbox';
 import Modaliconimage from '../../components/Modaliconimage';
@@ -139,6 +143,11 @@ export default class TabThreeScreenOne extends React.Component {
       this.setState({isRefreshing: false});
     },500);
   }
+
+  puzzle_click(value) {
+    this.refs.score_modal.open();
+  }
+
   onPressSourceButton() {
     this.refs.score_modal.open();
   }
@@ -184,7 +193,8 @@ export default class TabThreeScreenOne extends React.Component {
           backgroundColor:'rgb(165,186,194)',
         }}>
         <ScrollView
-          style={styles.contentContainer}     
+          style={styles.contentContainer}
+
           refreshControl={
             <RefreshControl
               refreshing={this.state.isRefreshing}
@@ -193,6 +203,82 @@ export default class TabThreeScreenOne extends React.Component {
             />
           }
         >
+        <View style={styles.mapBackground}>
+          <Image
+            style={styles.imageBackground}
+            resizeMode='contain'
+            source={require('../../images/Map_background.png')}>
+            <View style={styles.map}>
+              <Image
+                style={styles.mapTitle}
+                resizeMode='contain'
+                source={require('../../images/Map_title.png')}>
+              </Image>
+            </View>
+          <View style={styles.map}>
+            <Image
+              resizeMode='contain'
+              style={styles.imageBackground}
+              source={require('../../images/Map_realmap.png')}>
+            <View style={styles.row1}>
+              <View title="1" style={styles.row1Item} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+            </View>
+            <View title="1" style={styles.row1}>
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'A')} />
+              <View title="1" style={styles.row1Item} />
+              <View title="1" style={styles.row1Item} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'B')} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'C')} />
+            </View>
+            <View title="1" style={styles.row1}>
+              <View title="1" style={styles.row1Item} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'D')} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'E')} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+            </View>
+            <View title="1" style={styles.row1}>
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'F')} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'G')} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <MapPuzzle onClick={this.puzzle_click.bind(this, 'H')} />
+            </View>
+            <View title="1" style={styles.row1}>
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <View title="1" style={styles.row1Item} />
+              <MapPuzzle onClick={() => this.props.navigation.navigate('TabThreeScreenFour')} />
+              <View title="1" style={styles.row1Item} />
+              <View title="1" style={styles.row1Item} />
+            </View>
+            </Image>
+          </View>
+          <View style={styles.map}>
+          <Image
+            resizeMode='contain'
+            style={styles.imageBackground1}
+            source={require('../../images/Map_tip.png')}>
+          </Image>
+          </View>
+        <Modal
+          style={[styles.modal]}
+          position={"center"}
+          ref={"N_modal"}
+          isOpen={this.state.isOpen}
+        >
+          <View style={{flex:1, width:'100%', justifyContent:'center'}}>
+            <ScorePuzzle Submit={this.giveScore.bind(this)}/>
+            <Button
+              title={`Cancel`}
+              onPress={() => this.setState({isOpen: false})}
+              style={styles.btn}>
+           </Button>
+         </View>
+        </Modal>
             <View style={{flex:1, justifyContent:'center', alignItems:'center', width:width, height:height*0.7}}>
               <View style={{width:'100%'}}>
                 <View style={{flex:1, width:'100%', height: '100%', flexDirection:'row', flexWrap: 'nowrap'}}>
@@ -200,8 +286,8 @@ export default class TabThreeScreenOne extends React.Component {
                     <Image
                       style={styles.source}
                       source={require('../../images/home/water.png')}>
-                      <TouchableHighlight 
-                        underlayColor={'rgba(252,252,252,0.5)'} 
+                      <TouchableHighlight
+                        underlayColor={'rgba(252,252,252,0.5)'}
                         onPress={() => this.props.navigation.navigate('TabThreeScreenTwo')}>
                         <View style={styles.backdropView}>
                           <Text style={styles.headline}>{' '}</Text>
@@ -213,8 +299,8 @@ export default class TabThreeScreenOne extends React.Component {
                     <Image
                       style={styles.source}
                       source={require('../../images/home/water.png')}>
-                      <TouchableHighlight 
-                        underlayColor={'rgba(252,252,252,0.5)'} 
+                      <TouchableHighlight
+                        underlayColor={'rgba(252,252,252,0.5)'}
                         onPress={() => this.props.navigation.navigate('TabThreeScreenThree')}>
                         <View style={styles.backdropView}>
                           <Text style={styles.headline}>{' '}</Text>
@@ -226,8 +312,8 @@ export default class TabThreeScreenOne extends React.Component {
                     <Image
                       style={styles.source}
                       source={require('../../images/home/water.png')}>
-                      <TouchableHighlight 
-                        underlayColor={'rgba(252,252,252,0.5)'} 
+                      <TouchableHighlight
+                        underlayColor={'rgba(252,252,252,0.5)'}
                         onPress={this.onPressSourceButton.bind(this)}>
                         <View style={styles.backdropView}>
                           <Text style={styles.headline}>{' '}</Text>
@@ -239,8 +325,8 @@ export default class TabThreeScreenOne extends React.Component {
                     <Image
                       style={styles.source}
                       source={require('../../images/home/water.png')}>
-                      <TouchableHighlight 
-                        underlayColor={'rgba(252,252,252,0.5)'} 
+                      <TouchableHighlight
+                        underlayColor={'rgba(252,252,252,0.5)'}
                         onPress={this.onPressSourceButton.bind(this)}>
                         <View style={styles.backdropView}>
                           <Text style={styles.headline}>{' '}</Text>
@@ -252,8 +338,8 @@ export default class TabThreeScreenOne extends React.Component {
                     <Image
                       style={styles.source}
                       source={require('../../images/home/water.png')}>
-                      <TouchableHighlight 
-                        underlayColor={'rgba(252,252,252,0.5)'} 
+                      <TouchableHighlight
+                        underlayColor={'rgba(252,252,252,0.5)'}
                         onPress={this.onPressSourceButton.bind(this)}>
                         <View style={styles.backdropView}>
                           <Text style={styles.headline}>{' '}</Text>
@@ -264,10 +350,12 @@ export default class TabThreeScreenOne extends React.Component {
                 </View>
               </View>
             </View>
+            </Image>
+            </View>
         </ScrollView>
         <Modal
           style={[styles.modal]}
-          position={"top"}
+          position={"center"}
           ref={"score_modal"}
           isOpen={this.state.score_modal_isOpen}
         >
@@ -277,7 +365,7 @@ export default class TabThreeScreenOne extends React.Component {
             source={require('../../images/BG_top.png')}>
               <View style={styles.backdropSourceView}>
                 <Text onPress={() => this.setState({score_modal_isOpen:false})} style={styles.backdropSourceViewClose}>X</Text>
-                <View style={{flex:1, width:'80%', marginTop:15}}>
+                <View style={{flex:1, width:'80%', marginTop:0}}>
                   <GiveScoreDay3 Submit={this.giveScore.bind(this)}/>
                 </View>
               </View>
@@ -317,6 +405,50 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
   },
+
+  mapBackground:{
+    flex:1,
+    flexDirection:'row',
+    height:'100%',
+    width:'100%',
+    marginTop: 20,
+    padding:20,
+    alignItems: 'center',
+  },
+
+  imageBackground:{
+    height:'100%',
+    width:'100%',
+    padding:20,
+  },
+
+  imageBackground1:{
+    height:'100%',
+    width:'100%',
+    padding: 30,
+  },
+
+  map:{
+    flex:1,
+    flexDirection:'row',
+    width:'100%',
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  mapTitle:{
+    // height:height*0.1,
+    width:width*0.6,
+    alignItems: 'center',
+  },
+
+
+  textBold: {
+    fontWeight: '500',
+    color: '#000',
+  },
+
   headline: {
     marginTop:0,
     fontSize: 20,
@@ -329,23 +461,16 @@ const styles = StyleSheet.create({
     height: width*0.155,
     flexShrink:1
   },
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width:300,
-    height:300,
-    marginTop: Platform.OS == 'ios' ? 25 : 0,
-  },
   backdrop: {
     left:-16,
     top:-15,
     width: 330,
-    height: 400,
+    height: 450,
   },
   backdropSourceView:{
     flex:1,
     width:330,
-    height:400,
+    height:450,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
@@ -359,7 +484,7 @@ const styles = StyleSheet.create({
     color: 'rgb(60,60,60)'
   },
   backdropSourceViewClose:{
-    left:150,
+    left: Platform.OS == 'ios' ? 150 : 135,
     top:15,
     fontSize: 20,
     fontWeight: '800',
@@ -402,4 +527,37 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
   },
-});
+
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:300,
+    height:300,
+    borderWidth: 3,
+    marginTop: -10,
+    borderColor:'rgba(252,252,252,0.5)',
+    borderRadius: 10,
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 3,
+      width: 0
+    }
+  },
+
+  row1: {
+    width: '100%',
+    flexDirection: 'row',
+    alignContent: 'center',
+    flexWrap: 'nowrap',
+  },
+  row1Item: {
+    flexShrink:1,
+    width: '100%',
+    height: 60,
+    margin: 2,
+    backgroundColor: 'red',
+  },
+
+})
